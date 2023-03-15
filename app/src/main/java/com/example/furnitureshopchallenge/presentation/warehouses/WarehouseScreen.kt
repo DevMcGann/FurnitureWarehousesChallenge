@@ -71,9 +71,12 @@ fun WarehouseScreen(
                     ) {
                         Text("New")
                     }
-                    FloatingActionButton(onClick = { /*TODO*/ }) {
-                        Text("Map")
+                    if(roleResponse.data == "admin"){
+                        FloatingActionButton(onClick = { /*TODO*/ }) {
+                            Text("Map")
+                        }
                     }
+
                 }
             }
             is Response.Failure -> print(roleResponse.e)
