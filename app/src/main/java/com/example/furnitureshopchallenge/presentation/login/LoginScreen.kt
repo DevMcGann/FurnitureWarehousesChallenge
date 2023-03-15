@@ -2,7 +2,10 @@ package com.example.furnitureshopchallenge.presentation.login
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.Orientation
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Button
@@ -51,76 +54,69 @@ fun LoginScreen(navHostController: NavHostController, viewModel: LoginViewModel)
         mutableStateOf(TextFieldValue())
     }
 
+    val scrollState = rememberScrollState()
+
     ConstraintLayout(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color.Gray)
-    ) {
-        val (button, image, email, pass) = createRefs()
-
-        Image(
-            painter = painterResource(id = R.drawable.furniture),
-            contentDescription = "furnitureImage",
-            contentScale = ContentScale.FillHeight,
             modifier = Modifier
-                .constrainAs(image) {
+                .fillMaxSize()
+                .background(Color.Gray)
+                .scrollable(scrollState, orientation = Orientation.Vertical)
+        ) {
+            val (button, email, pass) = createRefs()
+
+
+            TextField(
+                label = { Text(text = "Email") },
+                value = username.value,
+                onValueChange = { username.value = it },
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
+                modifier = Modifier.constrainAs(email) {
                     top.linkTo(parent.top)
+                    bottom.linkTo(parent.bottom)
+                    start.linkTo(parent.start)
+                    end.linkTo(parent.end)
                 }
-                .height(300.dp)
-                .fillMaxWidth()
-        )
+            )
+
+            Spacer(modifier = Modifier.height(15.dp))
+
+            TextField(
+                label = { Text(text = "Password") },
+                value = password.value,
+                onValueChange = { password.value = it },
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+                modifier = Modifier.constrainAs(pass) {
+                    top.linkTo(email.bottom, margin = 10.dp)
+                    start.linkTo(parent.start)
+                    end.linkTo(parent.end)
+                }
+            )
 
 
-        TextField(
-            label = { Text(text = "Email") },
-            value = username.value,
-            onValueChange = { username.value = it },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
-            modifier = Modifier.constrainAs(email) {
-                top.linkTo(image.bottom, margin = 40.dp)
-                start.linkTo(parent.start)
-                end.linkTo(parent.end)
+            Box(modifier = Modifier
+                .padding(40.dp, 0.dp, 40.dp, 0.dp)
+                .constrainAs(button) {
+                    top.linkTo(pass.bottom, margin = 15.dp)
+                    start.linkTo(parent.start)
+                    end.linkTo(parent.end)
+                }) {
+                Button(
+                    onClick = {
+                        coroutineScope.launch {
+                            login(username.value.text, password.value.text)
+                        }
+                    },
+                    shape = RoundedCornerShape(50.dp),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(50.dp)
+                ) {
+                    Text(text = "Login")
+                }
             }
-        )
 
-        Spacer(modifier = Modifier.height(15.dp))
-
-        TextField(
-            label = { Text(text = "Password") },
-            value = password.value,
-            onValueChange = { password.value = it },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-            modifier = Modifier.constrainAs(pass) {
-                top.linkTo(email.bottom, margin = 10.dp)
-                start.linkTo(parent.start)
-                end.linkTo(parent.end)
-            }
-        )
-
-
-        Box(modifier = Modifier
-            .padding(40.dp, 0.dp, 40.dp, 0.dp)
-            .constrainAs(button) {
-                top.linkTo(pass.bottom, margin = 30.dp)
-                start.linkTo(parent.start)
-                end.linkTo(parent.end)
-            }) {
-            Button(
-                onClick = {
-                    coroutineScope.launch {
-                        login(username.value.text, password.value.text)
-                    }
-                },
-                shape = RoundedCornerShape(50.dp),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(50.dp)
-            ) {
-                Text(text = "Login")
-            }
         }
-
     }
-}
+
 
 
