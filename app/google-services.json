@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "842866188578",
+    "project_id": "challengeandroid-1a643",
+    "storage_bucket": "challengeandroid-1a643.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:842866188578:android:61e88897ee95317ab1c57b",
+        "android_client_info": {
+          "package_name": "com.example.furnitureshopchallenge"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "842866188578-0rl1tfufalg0bhhnve3k8ul1vgge0to5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.furnitureshopchallenge",
+            "certificate_hash": "a54bbdd875f1719e1e364be607982050bd645362"
+          }
+        },
+        {
+          "client_id": "842866188578-msk6dstfcjidsduda8v9m97dsnotptgt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXyNowaUua_rh0IgshBJWeRDUKH0GKzRE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "842866188578-msk6dstfcjidsduda8v9m97dsnotptgt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
